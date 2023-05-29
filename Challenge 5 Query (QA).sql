@@ -7,7 +7,7 @@ GROUP BY country;
 /*2. What is the total sales amount for each pub, including the beverage price and quantity sold?*/
 
 SELECT p.pub_name,
-	SUM(b.price_per_unit*s.quantity) AS total_sales
+	SUM(b.price_per_unit * s.quantity) AS total_sales
 FROM sales s 
 	INNER JOIN pubs p USING(pub_id)
 	INNER JOIN beverages b USING(beverage_id)
@@ -72,6 +72,7 @@ SELECT c.pub_id AS Pub_id,
 FROM CTE c 
 	INNER JOIN pubs p USING(pub_id)
 WHERE c.rating > c.avg_rating;
+
 
 /*9. What is the running total of sales amount for each pub, ordered by the transaction date?*/
 
