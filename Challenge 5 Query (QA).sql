@@ -60,16 +60,18 @@ ORDER BY ROUND(AVG(price_per_unit),2) DESC;
 
 /*8. Which pubs have a rating higher than the average rating of all pubs?*/
 
-SELECT p.pub_name, 
-	ROUND(AVG(r.rating),2) AS average_rating
-FROM ratings r
-	JOIN pubs p ON r.pub_id = p.pub_id
-GROUP BY p.pub_name
-HAVING AVG(r.rating) > (
-						SELECT AVG(rating)
-                        FROM ratings
-                        )
-ORDER BY ROUND(AVG(r.rating),2) DESC;
+WITH CTE AS (
+	SELECT pub_id, rating,
+    ROUND(AVG(rating) OVER (PARTITION BY pub_id),1) AS avg_rating
+    FROM ratings
+    GROUP BY pub_id, rating)
+SELECT c.pub_id AS Pub_id,
+	p.pub_name AS Pub_name,
+    c.rating AS Rating,
+    c.avg_rating AS Avg_rating
+FROM CTE c 
+	INNER JOIN pubs p USING(pub_id)
+WHERE c.rating > c.avg_rating;
 
 /*9. What is the running total of sales amount for each pub, ordered by the transaction date?*/
 
