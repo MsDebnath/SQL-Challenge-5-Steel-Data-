@@ -3,7 +3,7 @@
 Challenge 5 - Pub pricing analysis
 
 INTRO
-You are a Pricing Analyst working for a pub chain called 'Pubs "R" Us'
+You are a Pricing Analyst working for a pub chain called 'Pubs "R" Us'.
 You have been tasked with analysing the drinks prices and sales to gain a greater insight into how the pubs in your chain are performing.
 
 TABLES 
